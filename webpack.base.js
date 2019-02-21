@@ -10,9 +10,13 @@ module.exports = {
             targets: {
               browsers: ['last 2 versions']
             }
-          }]]
+          }]],
+          "plugins": [
+            "transform-decorators-legacy"
+          ]
         }
       }
     ]
-  }
+  },
+  devtool: 'source-map',
 }
