@@ -267,7 +267,9 @@ function (_Component) {
   _createClass(Home, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getHomeList();
+      if (!this.props.list.length) {
+        this.props.getHomeList();
+      }
     }
   }, {
     key: "render",
@@ -488,7 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default.a.static('public'));
 app.get('*', function (req, res) {
-  var store = Object(_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  var store = Object(_store__WEBPACK_IMPORTED_MODULE_3__["getStore"])();
   var matchedRoutes = Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["matchRoutes"])(_Routers__WEBPACK_IMPORTED_MODULE_4__["default"], req.path);
   var promises = [];
   matchedRoutes.forEach(function (item) {
@@ -539,7 +541,7 @@ var render = function render(store, routes, req) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_4__["default"], null), routes.map(function (route) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], route);
   })))));
-  return "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>ssr</title>\n</head>\n<body>\n    <div id=\"root\">".concat(content, "</div>\n    <script src=\"index.js\"></script>\n</body>\n</html>\n");
+  return "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>ssr</title>\n</head>\n<body>\n    <div id=\"root\">".concat(content, "</div>\n    <script >\n    window.context={\n      state:").concat(JSON.stringify(store.getState()), "\n    }\n</script>\n    <script src=\"index.js\"></script>\n</body>\n</html>\n");
 };
 
 /***/ }),
@@ -548,11 +550,13 @@ var render = function render(store, routes, req) {
 /*!****************************!*\
   !*** ./src/store/index.js ***!
   \****************************/
-/*! exports provided: default */
+/*! exports provided: getStore, getClientStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStore", function() { return getStore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClientStore", function() { return getClientStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
@@ -564,12 +568,13 @@ __webpack_require__.r(__webpack_exports__);
 var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   home: _containers_Home_store__WEBPACK_IMPORTED_MODULE_2__["reducer"]
 });
-
 var getStore = function getStore() {
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a));
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (getStore);
+var getClientStore = function getClientStore() {
+  var defaultStore = window.context.state;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, defaultStore, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a));
+};
 
 /***/ }),
 

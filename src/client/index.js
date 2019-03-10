@@ -4,9 +4,10 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Header from '../components/Header'
 import routes from '../Routers'
-import getStore from '../store'
+import {getClientStore} from '../store'
 
-const App = () => <Provider store={getStore()}>
+const store=getClientStore()
+const App = () => <Provider store={store}>
   <BrowserRouter>
     <Fragment>
       <Header/>
