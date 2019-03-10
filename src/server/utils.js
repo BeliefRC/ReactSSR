@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
+import { StaticRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import Routers from '../Routers'
-import getStore from '../store'
+import Header from '../components/Header'
 
-export const render = (req) => {
+export const render = (store, routes, req) => {
 
   const content = renderToString(
-    <Provider store={getStore()}>
+    <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
-        {Routers}
+        <Fragment>
+          <Header/>
+          {routes.map(route => (
+            <Route {...route} />
+          ))}
+        </Fragment>
       </StaticRouter>
     </Provider>
   )
@@ -26,4 +30,5 @@ export const render = (req) => {
 </body>
 </html>
 `
+
 }

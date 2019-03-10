@@ -6,13 +6,15 @@ module.exports = {
         loader: 'babel-loader',
         exclude: '/node_modules/',
         options: {
-          presets: ['react', 'stage-0', ['env', {
+          presets: ['@babel/react', ['@babel/env', {
             targets: {
               browsers: ['last 2 versions']
             }
           }]],
-          "plugins": [
-            "transform-decorators-legacy"
+          'plugins': [
+            ['@babel/plugin-proposal-decorators', {'legacy': true}],
+            ['@babel/plugin-proposal-class-properties', {'loose': true}],
+            '@babel/plugin-proposal-optional-chaining'
           ]
         }
       }

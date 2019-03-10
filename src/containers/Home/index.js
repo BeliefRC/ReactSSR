@@ -12,11 +12,16 @@ const mapDispatchToProps = dispatch => ({
   }),
   mapDispatchToProps)
 export default class Home extends Component {
+  // 服务端渲染时，把store里的数据加载好
+  static loadData = (store) => {
+    return store.dispatch(getHomeList())
+  }
+
   componentDidMount () {
     this.props.getHomeList()
   }
 
-  getList () {
+  getList = () => {
     const {list} = this.props
     return list.map(item => <div key={item.id}>
       {item.title}

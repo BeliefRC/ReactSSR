@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ReactDom from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import Routers from '../Routers'
+import Header from '../components/Header'
+import routes from '../Routers'
 import getStore from '../store'
 
 const App = () => <Provider store={getStore()}>
   <BrowserRouter>
-    {Routers}
+    <Fragment>
+      <Header/>
+      {routes.map(route => (
+        <Route {...route} />
+      ))}
+    </Fragment>
   </BrowserRouter>
 </Provider>
 
