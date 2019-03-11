@@ -5,14 +5,14 @@ import Login from './containers/Login'
 export default [
   {
     path: '/',
-    key:'home',
+    key: 'home',
     component: Home,
     exact: true,
     loadData: Home.loadData
   },
   {
     path: '/login',
-    key:'login',
+    key: 'login',
     component: Login,
     exact: true,
     // loadData: Login.loadData()
