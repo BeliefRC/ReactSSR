@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route } from 'react-router-dom'
+import {renderRoutes} from 'react-router-config'
 import { Provider } from 'react-redux'
-import Header from '../components/Header'
 
 export const render = (store, routes, req) => {
 
@@ -10,10 +10,7 @@ export const render = (store, routes, req) => {
     <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
         <Fragment>
-          <Header/>
-          {routes.map(route => (
-            <Route {...route} />
-          ))}
+          {renderRoutes(routes)}
         </Fragment>
       </StaticRouter>
     </Provider>
