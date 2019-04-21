@@ -37,28 +37,3 @@ export default class Home extends Component {
     </div>
   }
 }
-
-const a = {
-  success: true,
-  'data': [{
-    id: 1,
-    title: 'ECMAScript 6简介'
-  },
-    {
-      id: 2,
-      title: 'let 和 const 命令'
-    },
-    {
-      id: 3,
-      title: '变量的解构赋值'
-    },
-    {
-      id: 4,
-      title: '字符串的扩展'
-    },
-    {
-      id: 5,
-      title: '正则的扩展'
-    },
-  ]
-}

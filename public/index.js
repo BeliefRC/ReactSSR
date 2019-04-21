@@ -16142,8 +16142,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Header */ "./src/components/Header.js");
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Header */ "./src/components/Header/index.js");
 /* harmony import */ var react_router_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-config */ "./node_modules/react-router-config/esm/react-router-config.js");
+/* harmony import */ var _components_Header_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Header/store */ "./src/components/Header/store/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16161,6 +16162,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -16187,6 +16189,10 @@ function (_Component) {
   return App;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+App.loadData = function (store) {
+  return store.dispatch(_components_Header_store__WEBPACK_IMPORTED_MODULE_3__["actions"].getHeaderInfo());
+};
+
 
 
 /***/ }),
@@ -16212,6 +16218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ([{
   path: '/',
   component: _App__WEBPACK_IMPORTED_MODULE_3__["default"],
+  loadData: _App__WEBPACK_IMPORTED_MODULE_3__["default"].loadData,
   routes: [{
     path: '/',
     key: 'home',
@@ -16285,10 +16292,10 @@ var instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
 
 /***/ }),
 
-/***/ "./src/components/Header.js":
-/*!**********************************!*\
-  !*** ./src/components/Header.js ***!
-  \**********************************/
+/***/ "./src/components/Header/index.js":
+/*!****************************************!*\
+  !*** ./src/components/Header/index.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16298,6 +16305,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./src/components/Header/store/index.js");
+var _dec, _class;
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16319,7 +16330,21 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Header =
+
+var Header = (_dec = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(function (state) {
+  return {
+    login: state.header.login
+  };
+}, function (dispatch) {
+  return {
+    handleLogin: function handleLogin() {
+      dispatch(_store__WEBPACK_IMPORTED_MODULE_3__["actions"].login());
+    },
+    handleLogout: function handleLogout() {
+      dispatch(_store__WEBPACK_IMPORTED_MODULE_3__["actions"].logout());
+    }
+  };
+}), _dec(_class =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Header, _Component);
@@ -16333,19 +16358,141 @@ function (_Component) {
   _createClass(Header, [{
     key: "render",
     value: function render() {
+      var _this$props = this.props,
+          login = _this$props.login,
+          handleLogin = _this$props.handleLogin,
+          handleLogout = _this$props.handleLogout;
+      console.log(login);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
-      }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, "\u9996\u9875"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), login ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/login"
-      }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      }, "\u7FFB\u8BD1\u5217\u8868"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: handleLogout
+      }, "\u9000\u51FA")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: handleLogin
+      }, "\u767B\u5F55"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
     }
   }]);
 
   return Header;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //31：53
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"])) || _class);
+
+
+/***/ }),
+
+/***/ "./src/components/Header/store/actions.js":
+/*!************************************************!*\
+  !*** ./src/components/Header/store/actions.js ***!
+  \************************************************/
+/*! exports provided: login, logout, getHeaderInfo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHeaderInfo", function() { return getHeaderInfo; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/components/Header/store/constants.js");
+
+
+var changeLogin = function changeLogin(value) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__["CHANGE_LOGIN"],
+    value: value
+  };
+};
+
+var login = function login() {
+  return function (dispatch, getState, request) {
+    return request.get('/api/login').then(function (res) {
+      dispatch(changeLogin(true));
+    });
+  };
+};
+var logout = function logout() {
+  return function (dispatch, getState, request) {
+    return request.get('/api/logout').then(function (res) {
+      dispatch(changeLogin(false));
+    });
+  };
+};
+var getHeaderInfo = function getHeaderInfo() {
+  return function (dispatch, getState, request) {
+    return request.get('/api/isLogin').then(function (res) {
+      dispatch(changeLogin(res.data.data.login));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./src/components/Header/store/constants.js":
+/*!**************************************************!*\
+  !*** ./src/components/Header/store/constants.js ***!
+  \**************************************************/
+/*! exports provided: CHANGE_LOGIN */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_LOGIN", function() { return CHANGE_LOGIN; });
+var CHANGE_LOGIN = 'HEADER/CHANGE_LOGIN';
+
+/***/ }),
+
+/***/ "./src/components/Header/store/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/Header/store/index.js ***!
+  \**********************************************/
+/*! exports provided: reducer, actions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducer */ "./src/components/Header/store/reducer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./src/components/Header/store/actions.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return _actions__WEBPACK_IMPORTED_MODULE_1__; });
 
 
 
+
+/***/ }),
+
+/***/ "./src/components/Header/store/reducer.js":
+/*!************************************************!*\
+  !*** ./src/components/Header/store/reducer.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/components/Header/store/constants.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var defaultState = {
+  login: false
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["CHANGE_LOGIN"]:
+      return _objectSpread({}, state, {
+        login: action.value
+      });
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 
@@ -16452,25 +16599,6 @@ function (_Component) {
   return store.dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_2__["getHomeList"])());
 }, _temp)) || _class);
 
-var a = {
-  success: true,
-  'data': [{
-    id: 1,
-    title: 'ECMAScript 6简介'
-  }, {
-    id: 2,
-    title: 'let 和 const 命令'
-  }, {
-    id: 3,
-    title: '变量的解构赋值'
-  }, {
-    id: 4,
-    title: '字符串的扩展'
-  }, {
-    id: 5,
-    title: '正则的扩展'
-  }]
-};
 
 /***/ }),
 
@@ -16484,15 +16612,12 @@ var a = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHomeList", function() { return getHomeList; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./src/containers/Home/store/constants.js");
-
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/containers/Home/store/constants.js");
 
 
 var changeList = function changeList(list) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["CHANGE_List"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__["CHANGE_LIST"],
     list: list
   };
 };
@@ -16512,13 +16637,13 @@ var getHomeList = function getHomeList() {
 /*!************************************************!*\
   !*** ./src/containers/Home/store/constants.js ***!
   \************************************************/
-/*! exports provided: CHANGE_List */
+/*! exports provided: CHANGE_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_List", function() { return CHANGE_List; });
-var CHANGE_List = 'HOME/CHANGE_List';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_LIST", function() { return CHANGE_LIST; });
+var CHANGE_LIST = 'HOME/CHANGE_LIST';
 
 /***/ }),
 
@@ -16562,7 +16687,7 @@ var defaultState = {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["CHANGE_List"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["CHANGE_LIST"]:
       return _objectSpread({}, state, {
         newsList: action.list
       });
@@ -16643,9 +16768,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-var instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: 'http://yapi.demo.qunar.com/mock/63165/ssr'
-});
+
+var instance = function instance(req) {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+    baseURL: 'http://localhost:8080/ssr',
+    headers: {
+      cookie: req.get('cookie') || ''
+    }
+  });
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (instance);
 
 /***/ }),
@@ -16664,22 +16796,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _containers_Home_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../containers/Home/store */ "./src/containers/Home/store/index.js");
-/* harmony import */ var _client_request__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../client/request */ "./src/client/request.js");
-/* harmony import */ var _server_request__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../server/request */ "./src/server/request.js");
+/* harmony import */ var _components_Header_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header/store */ "./src/components/Header/store/index.js");
+/* harmony import */ var _client_request__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../client/request */ "./src/client/request.js");
+/* harmony import */ var _server_request__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../server/request */ "./src/server/request.js");
+
 
 
 
 
 
 var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  home: _containers_Home_store__WEBPACK_IMPORTED_MODULE_2__["reducer"]
+  home: _containers_Home_store__WEBPACK_IMPORTED_MODULE_2__["reducer"],
+  header: _components_Header_store__WEBPACK_IMPORTED_MODULE_3__["reducer"]
 });
-var getStore = function getStore() {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"].withExtraArgument(_server_request__WEBPACK_IMPORTED_MODULE_4__["default"])));
+var getStore = function getStore(req) {
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"].withExtraArgument(Object(_server_request__WEBPACK_IMPORTED_MODULE_5__["default"])(req))));
 };
 var getClientStore = function getClientStore() {
   var defaultStore = window.context.state;
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, defaultStore, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"].withExtraArgument(_client_request__WEBPACK_IMPORTED_MODULE_3__["default"])));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, defaultStore, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"].withExtraArgument(_client_request__WEBPACK_IMPORTED_MODULE_4__["default"])));
 };
 
 /***/ })

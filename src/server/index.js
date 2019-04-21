@@ -7,13 +7,13 @@ import routes from '../Routers'
 
 const app = express()
 app.use(express.static('public'))
-app.use('/api', proxy('http://yapi.demo.qunar.com', {
+app.use('/api', proxy('http://localhost:8080', {
   proxyReqPathResolver: function (req) {
-    return `/mock/63165/ssr/api${req.url}`
+    return `/ssr/api${req.url}`
   }
 }))
 app.get('*', (req, res) => {
-  const store = getStore()
+  const store = getStore(req)
   // 根据路由路径，在store中添加数据
   const matchedRoutes = matchRoutes(routes, req.path)
   const promises = []

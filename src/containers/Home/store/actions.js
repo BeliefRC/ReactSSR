@@ -1,8 +1,7 @@
-import axios from 'axios'
-import { CHANGE_List } from './constants'
+import { CHANGE_LIST } from './constants'
 
 const changeList = (list) => ({
-  type: CHANGE_List,
+  type: CHANGE_LIST,
   list
 })
 export const getHomeList = () => {
