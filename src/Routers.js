@@ -3,6 +3,7 @@ import App from './App'
 import Home from './containers/Home'
 import Login from './containers/Login'
 import Translation from './containers/Translation/inedx'
+import NotFound from './containers/NotFound'
 
 export default [
   {
@@ -29,8 +30,11 @@ export default [
         key: 'translation',
         component: Translation,
         exact: true,
-         loadData: Translation.loadData
+        loadData: Translation.loadData
       },
+      {
+        component: NotFound
+      }
     ]
   },
 ]
