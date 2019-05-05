@@ -1021,14 +1021,20 @@ app.get('*', function (req, res) {
   var promises = [];
   matchedRoutes.forEach(function (item) {
     if (item.route.loadData) {
-      promises.push(item.route.loadData(store));
+      var promise = new Promise(function (resolve, reject) {
+        item.route.loadData(store).then(resolve).catch(resolve);
+      });
+      promises.push(promise);
     }
   });
   Promise.all(promises).then(function () {
     var context = {};
     var html = Object(_utils__WEBPACK_IMPORTED_MODULE_3__["render"])(store, _Routers__WEBPACK_IMPORTED_MODULE_5__["default"], req, context);
 
-    if (context.notFound) {
+    if (context.action === 'REPLACE') {
+      res.status(301);
+      res.send(html);
+    } else if (context.notFound) {
       res.status(404);
       res.send(html);
     } else {
