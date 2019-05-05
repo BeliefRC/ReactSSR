@@ -1,7 +1,8 @@
 import React from 'react'
+import App from './App'
 import Home from './containers/Home'
 import Login from './containers/Login'
-import App from './App'
+import Translation from './containers/Translation/inedx'
 
 export default [
   {
@@ -22,6 +23,13 @@ export default [
         component: Login,
         exact: true,
         // loadData: Login.loadData()
+      },
+      {
+        path: '/translation',
+        key: 'translation',
+        component: Translation,
+        exact: true,
+         loadData: Translation.loadData
       },
     ]
   },
