@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route } from 'react-router-dom'
-import {renderRoutes} from 'react-router-config'
+import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
 
-export const render = (store, routes, req,context) => {
+export const render = (store, routes, req, context) => {
 
   const content = renderToString(
     <Provider store={store}>
@@ -15,11 +15,13 @@ export const render = (store, routes, req,context) => {
       </StaticRouter>
     </Provider>
   )
+  const cssStr = context.css.length ? context.css.join('\n') : ''
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>ssr</title>
+    <style>${cssStr}</style>
 </head>
 <body>
     <div id="root">${content}</div>

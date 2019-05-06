@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Index from './components/Header'
+import Header from './components/Header'
 import { renderRoutes } from 'react-router-config'
 import { actions } from './components/Header/store'
 
@@ -9,8 +9,9 @@ export default class App extends Component {
   }
 
   render () {
+    const {staticContext} = this.props
     return <Fragment>
-      <Index/>
+      <Header staticContext={staticContext}/>
       {renderRoutes(this.props.route.routes)}
     </Fragment>
   }

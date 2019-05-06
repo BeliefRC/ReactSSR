@@ -27,7 +27,9 @@ app.get('*', (req, res) => {
   })
   Promise.all(promises)
     .then(() => {
-      const context = {}
+      const context = {
+        css: []
+      }
       const html = render(store, routes, req, context)
       if (context.action === 'REPLACE') {
         res.status(301)

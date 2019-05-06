@@ -5,6 +5,7 @@ import Login from './containers/Login'
 import Translation from './containers/Translation/inedx'
 import NotFound from './containers/NotFound'
 
+console.log(Home.loadData)
 export default [
   {
     path: '/',
