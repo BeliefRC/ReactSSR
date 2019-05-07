@@ -1,6 +1,7 @@
 body{
-    background: green;
+    background: gray;
 }
 .test{
-    background: red;
+    margin-top: 16px;
+    background: whitesmoke;
 }

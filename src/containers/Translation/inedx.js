@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import {Helmet} from "react-helmet";
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getTranslationList } from './store/actions'
@@ -37,6 +38,11 @@ export default class Translation extends Component {
   render () {
     return this.props.login ?
       <div className={styles.test}>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>这是ssr项目的翻译页面 - 翻译达人</title>
+          <meta name='description' content='这是ssr项目的翻译页面 - 翻译达人'/>
+        </Helmet>
         {this.getList()}
       </div>
       :

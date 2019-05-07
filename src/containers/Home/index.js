@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import {Helmet} from "react-helmet";
 import { connect } from 'react-redux'
 import { getHomeList } from './store/actions'
 import withStyle from '../../withStyle'
@@ -36,6 +37,11 @@ class Home extends Component {
 
   render () {
     return <div className={styles.test}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>这是ssr项目的首页 - 超棒的seo优化技巧</title>
+        <meta name='description' content='超棒的seo优化技巧'/>
+      </Helmet>
       {this.getList()}
       {/*<button onClick={() => {alert('click')}}>click</button>*/}
     </div>
