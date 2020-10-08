@@ -38,7 +38,7 @@ npm run  dev//项目运行
 	- 使用`react-dom/server`中的`renderToString`方法将组件转换成html字符串
 	- 路由组件中使用`StaticRouter`代替传统的`BrowserRouter`或`HashRouter`,并且传入`location`属性（当前路由地址）、`context`属性（全局上下文数据）
 	- 使用`react-router-config`提供的`renderRoutes`方法，渲染出不同路由对应的页面
-	- 在`window.context`上挂载store数据，实现数据的注水，达到客户端，服务端的状态统一
+	- 在`window.context`上挂载store数据，实现数据的注水，达到客户端，服务端的状态统一的效果
 
 2. 客户端相关代码
 	- 使用`ReactDom.hydrate`代替`ReactDom.render`方法
@@ -46,8 +46,9 @@ npm run  dev//项目运行
 
 3. store及相关配置
 	- 提供`getStore`和`getClientStore`两个方法，分别为生成服务端及客户端store代码
-	- 两个方法中使用了`redux-thunk`中间件，并且运用到了`thunk.withExtraArgument`方法闯入了不同的axios实例
+	- 两个方法中使用了`redux-thunk`中间件，并且运用到了`thunk.withExtraArgument`方法创建了不同的axios实例
 	- 两个不同的axios实例（request方法）的主要区别是baseUrl配置不同
+	- `getClientStore`方法中会从`window.context`取出默认的state，并且传入默认的`createStore`，实现数据脱水，达到客户端，服务端的状态统一的效果
 
 4. webpack配置
 	- 除了配置基本的entry、output、loader外，需要注意的是`webpack.server.js`中需要配置target为node，并且加以下代码，目的是不打包node的相关代码
