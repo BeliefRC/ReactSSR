@@ -31,6 +31,7 @@ npm run  dev//项目运行
  ```
 ## 三.使用到的技术栈
 
+
 1. 在`server/**js` 中使用express创建http服务
 	- 使用`express.static`将public目录作为静态资源服务目录
 	- 使用`express-http-proxy`做代理转发
@@ -59,3 +60,8 @@ const serverConfig = {
 	//其他配置....
 }
 ```
+
+5. 其他配置
+	- 使用`nodemon`监控监管代码，实现服务端代码自动重启
+	- 使用`npm-run-all`并行打包客户端服务端代码，并且启动相关服务
+	- 使用`react-helmet`支持title和meta的修改的,进行网页SEO优化
