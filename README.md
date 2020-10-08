@@ -29,7 +29,7 @@ npm run  dev//项目运行
 		webpack.server.js    服务端webbpack配置
     	README.md
  ```
-##三，使用到的技术栈
+## 三.使用到的技术栈
 
 1. 在`server/**js` 中使用express创建http服务
 	- 使用`express.static`将public目录作为静态资源服务目录
@@ -49,7 +49,7 @@ npm run  dev//项目运行
 	- 两个不同的axios实例（request方法）的主要区别是baseUrl配置不同
 
 4. webpack配置
-	- 除了配置基本的entry、output、loader外，需要注意的是`webpack.server.js`中需要配置target为node，并且加以下代码
+	- 除了配置基本的entry、output、loader外，需要注意的是`webpack.server.js`中需要配置target为node，并且加以下代码，目的是不打包node的相关代码
  
  ```javascript
 const nodeExternals = require('webpack-node-externals')
@@ -59,4 +59,3 @@ const serverConfig = {
 	//其他配置....
 }
 ```
-目的是不打包node的相关代码
